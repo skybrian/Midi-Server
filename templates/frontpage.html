@@ -1,0 +1,67 @@
+<html>
+<head><title>Midi File Creator</title>
+<style type="text/css">
+    .offscreen { position: absolute; left: -1000; }
+    .hidden { visibility: hidden }
+    .note { font-style: italic; color: #888; }
+    .note a { color: #888; }
+    #last_played { margin-top: 1em; }
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
+<script>
+
+function playMusic(midiUrl) {
+  stopMusic();
+  $('body').append('<embed src="' + midiUrl + '" id="midi" autostart="true" class="offscreen"/>');
+  $('#last_played_link').attr("href", midiUrl);
+  var fullUrl = $('#last_played_link').get(0).href;
+  $('#last_played_link').text(fullUrl);
+  $('#last_played').removeClass('hidden');
+}
+
+function stopMusic() {
+  $('#midi').remove();
+}
+
+function makeUrl(notes, tempo) {
+  var shorterNotes = notes.replace(/\s/g, "");
+  return "midi?n=" + escape(shorterNotes) + "&t=" + escape(tempo);
+}
+
+function readField(id) {
+  return $('#' + id).val();
+}
+</script>
+</head>
+<body>
+<h2>Midi File Creator</h2>
+
+<p>This page helps you create a midi file that plays a few notes of music.</p>
+
+<p>Tempo: <input type="text" id="tempo" size="4" value="160"/></p>
+<p>Notes to play:<br>
+<input type="text" id="notes" size="100" value="CDEz cdez"/><br>
+<span class="note">Notes are like <a
+href="http://abcnotation.com/blog/2010/01/31/how-to-understand-abc-the-basics/"
+target="midi_help">ABC notation</a> (see below)<br>
+</span>
+</p>
+
+<button onclick="playMusic(makeUrl(readField('notes'), readField('tempo')))">Play Music</button>
+<button onclick="stopMusic()">Stop</button>
+
+<div id="last_played" class="hidden block">
+URL of the new midi file: <a id="last_played_link"></a>
+</div>
+
+<p>Supported notation:</p>
+<ul>
+  <li>notes: CDEFGAB cdefgab
+  <li>sharps and flats: c^ d_
+  <li>octave up and down: c' C,
+  <li>longer notes: c2 c3 c4
+  <li>shorter notes: c/ c/3 c/4
+</ul>
+
+</body>
+</html>
