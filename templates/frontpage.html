@@ -6,6 +6,7 @@
     .note { font-style: italic; color: #888; }
     .note a { color: #888; }
     #last_played { margin-top: 1em; }
+    body { margin-left: 2em; margin-right: 2em; }
 </style>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
 <script>
@@ -40,9 +41,9 @@ function readField(id) {
 
 <p>Tempo: <input type="text" id="tempo" size="4" value="160"/></p>
 <p>Notes to play:<br>
-<input type="text" id="notes" size="100" value="CDEz cdez"/><br>
-<span class="note">Notes are like <a
-href="http://abcnotation.com/blog/2010/01/31/how-to-understand-abc-the-basics/"
+<input type="text" id="notes" size="100" value="CDE_F GAA^B c2 C2 C,2"/><br>
+<span class="note">Notes are like in <a
+href="http://abcnotation.com/blog/2010/01/31/how-to-understand-abc-the-basics/#notes"
 target="midi_help">ABC notation</a> (see below)<br>
 </span>
 </p>
@@ -61,6 +62,7 @@ URL of the new midi file: <a id="last_played_link"></a>
   <li>octave up and down: c' C,
   <li>longer notes: c2 c3 c4
   <li>shorter notes: c/ c/3 c/4
+  <li>rests: z z2 z/
 </ul>
 
 </body>
