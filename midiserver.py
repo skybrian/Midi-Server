@@ -117,6 +117,7 @@ class SendMidiFile(webapp.RequestHandler):
 
 
 def main():
+  os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
   app = webapp.WSGIApplication([
       ('/', MainPage), ('/midi', SendMidiFile)
       ], debug=True)
